@@ -56,7 +56,8 @@ class FirebaseHelper {
     final id = FirebaseAuth.instance.currentUser?.uid;
     if (id == null) return;
     // Берём ссылку на корень дерева с записями для текущего пользователя
-    final ref = FirebaseDatabase.instance.ref("https://hw-firebase-week18-default-rtdb.europe-west1.firebasedatabase.app/notes/$id");
+    final ref = FirebaseDatabase.instance.ref(
+        "notes/$id");
     // Сначала генерируем новую ветку с помощью push() и потом в эту же ветку
     // добавляем запись
     await ref.push().set(note);
@@ -65,7 +66,8 @@ class FirebaseHelper {
   static Stream<DatabaseEvent> getNotes() {
     final id = FirebaseAuth.instance.currentUser?.uid;
     if (id == null) return const Stream.empty();
-    final ref = FirebaseDatabase.instance.ref("https://hw-firebase-week18-default-rtdb.europe-west1.firebasedatabase.app/notes/$id");
+    final ref = FirebaseDatabase.instance.ref(
+        "notes/$id");
     return ref.onValue;
   }
 
@@ -80,8 +82,8 @@ class FirebaseHelper {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print(e.message);
+      print(e);
+      // print(e.message);
     }
   }
 }
