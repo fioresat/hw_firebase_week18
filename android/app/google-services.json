@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "83397990435",
+    "firebase_url": "https://hw-firebase-week18-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "hw-firebase-week18",
+    "storage_bucket": "hw-firebase-week18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83397990435:android:91a60afca859d383b77996",
+        "android_client_info": {
+          "package_name": "com.example.hw_firebase_week18"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83397990435-uk2fu6ahreictmpgd79o4eel302i1nug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuqdVG5h0TJSr-mzBvH2HVTLdpixJwVgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83397990435-uk2fu6ahreictmpgd79o4eel302i1nug.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "83397990435-r6dnpuo2tvhk31nrnudt8db20t4ifpob.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hwFirebaseWeek18"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
