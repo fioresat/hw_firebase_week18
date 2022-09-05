@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               itemBuilder: (_, i) => ListTile(
                 title: Text(notes[i]),
                 subtitle: TextButton(
-                  onPressed: () async {_updateDialog(notes[i]);},
+                  onPressed: () async {_showDialog(notes[i]);},
                   child: const Text('Update note'),
                 ),
                 trailing: IconButton(
@@ -66,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showDialog();
+          _showDialog(null);
         },
         child: const Icon(Icons.add),
       ),
@@ -80,37 +80,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  Future _showDialog() => showGeneralDialog(
-        context: context,
-        barrierDismissible: false,
-        pageBuilder: (_, __, ___) {
-          final noteController = TextEditingController();
-          return AlertDialog(
-            title: const Text('New note'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: noteController,
-                  decoration: const InputDecoration(hintText: 'Note'),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  final note = noteController.text;
-                  FirebaseHelper.write(note);
-                  Navigator.pop(context);
-                },
-                child: const Text('Add'),
-              )
-            ],
-          );
-        },
-      );
+  // Future _showDialog() => showGeneralDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       pageBuilder: (_, __, ___) {
+  //         final noteController = TextEditingController();
+  //         return AlertDialog(
+  //           title: const Text('New note'),
+  //           content: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               TextField(
+  //                 controller: noteController,
+  //                 decoration: const InputDecoration(hintText: 'Note'),
+  //               ),
+  //             ],
+  //           ),
+  //           actions: [
+  //             TextButton(
+  //               onPressed: () async {
+  //                 final note = noteController.text;
+  //                 FirebaseHelper.write(note);
+  //                 Navigator.pop(context);
+  //               },
+  //               child: const Text('Add'),
+  //             )
+  //           ],
+  //         );
+  //       },
+  //     );
 
-  Future _updateDialog(String oldNote) => showGeneralDialog(
+  Future _showDialog(String? oldNote) => showGeneralDialog(
     context: context,
     barrierDismissible: false,
     pageBuilder: (_, __, ___) {
@@ -130,7 +130,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           TextButton(
             onPressed: () async {
               final note = noteController.text;
-              FirebaseHelper.delete(oldNote);
+              if(oldNote!=null)
+              {FirebaseHelper.delete(oldNote);}
               FirebaseHelper.write(note);
               //FirebaseHelper.update(oldNote, note);
               Navigator.pop(context);
