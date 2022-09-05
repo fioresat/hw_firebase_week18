@@ -56,8 +56,7 @@ class FirebaseHelper {
     final id = FirebaseAuth.instance.currentUser?.uid;
     if (id == null) return;
     // Берём ссылку на корень дерева с записями для текущего пользователя
-    final ref = FirebaseDatabase.instance.ref(
-        "notes/$id");
+    final ref = FirebaseDatabase.instance.ref("notes/$id");
     // Сначала генерируем новую ветку с помощью push() и потом в эту же ветку
     // добавляем запись
     await ref.push().set(note);
@@ -66,24 +65,26 @@ class FirebaseHelper {
   static Stream<DatabaseEvent> getNotes() {
     final id = FirebaseAuth.instance.currentUser?.uid;
     if (id == null) return const Stream.empty();
-    final ref = FirebaseDatabase.instance.ref(
-        "notes/$id");
+    final ref = FirebaseDatabase.instance.ref("notes/$id");
     return ref.onValue;
   }
 
-  // static Future<void> delete(String note) async {
-  //   final id = FirebaseAuth.instance.currentUser?.uid;
-  //   final ref = FirebaseDatabase.instance.ref("notes/$id");
-  //   ref.push().key;
-  //   await ref.remove();
-  // }
+  static Future<void> delete(String note) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final notes = await FirebaseDatabase.instance.ref("notes/$userId").get();
+    notes.children.forEach((element) {
+      if ((element.value as String?) == note) {
+        element.ref.remove();
+      }
+    });
+  }
 
   static Future<void> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       print(e);
-      // print(e.message);
+// print(e.message);
     }
   }
 }

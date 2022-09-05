@@ -49,12 +49,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               itemCount: notes.length,
               itemBuilder: (_, i) => ListTile(
                 title: Text(notes[i]),
-                // trailing: IconButton(
-                //   onPressed: () async {
-                //     FirebaseHelper.delete(notes[i]);
-                //   },
-                //   icon: Icon(Icons.delete_outline),
-                // ),
+                trailing: IconButton(
+                  onPressed: () async {
+                    FirebaseHelper.delete(notes[i]);
+                  },
+                  icon: Icon(Icons.delete_outline),
+                ),
               ),
             ),
           ),
